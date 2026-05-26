@@ -22,7 +22,7 @@ apt-get install -y --no-install-recommends git curl aria2 ca-certificates procps
 
 echo "[setup] installing Python runtime packages"
 python -m pip install --upgrade pip
-python -m pip install --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
+python -m pip install --upgrade --pre torch torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
 python -m pip install -r "$PYWORKER_DIR/requirements.txt"
 
 if [ ! -d "$COMFY_DIR/.git" ]; then
@@ -99,4 +99,3 @@ curl -fsS http://127.0.0.1:18000/health
 
 echo "[setup] starting Vast PyWorker"
 exec python "$PYWORKER_DIR/worker.py"
-
