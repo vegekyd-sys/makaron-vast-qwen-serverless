@@ -98,4 +98,5 @@ done
 curl -fsS http://127.0.0.1:18000/health
 
 echo "[setup] starting Vast PyWorker"
+export WORKER_PORT="${WORKER_PORT:-8000}"
 exec python "$PYWORKER_DIR/worker.py"
