@@ -20,3 +20,19 @@ The worker exposes:
 The setup script fails closed if the downloaded checkpoint or LoRA hash does
 not match, so it cannot silently swap to another model.
 
+## Baked image
+
+The `Dockerfile` bakes the runtime and model into the image:
+
+- CUDA/PyTorch is upgraded to nightly cu128 for RTX 5090 support
+- ComfyUI is pinned to commit `379fbd1a827cd2ce97984a7e8ea8b7159780cd1c`
+- The Qwen checkpoint and rotate LoRA are downloaded during build and verified
+  with SHA256
+- Runtime startup is handled by `start.sh`; it only starts ComfyUI, the FastAPI
+  wrapper, and Vast PyWorker
+
+Target image:
+
+```bash
+ghcr.io/vegekyd-sys/makaron-vast-qwen-serverless:qwen-aio-v1
+```
